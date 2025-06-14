@@ -1,4 +1,4 @@
-# oficial image from python
+# official image from python
 FROM python:3.13-slim
 
 # stablish work directory for the container
