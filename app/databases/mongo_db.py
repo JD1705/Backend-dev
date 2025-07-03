@@ -9,12 +9,9 @@ load_dotenv()
 MONGO_URI = os.getenv('MONGO_URI')
 
 # stablish client, databases and collections
+def get_db_connection():
+    client = MongoClient(MONGO_URI)
 
-client = MongoClient(MONGO_URI)
-
-# database
-db = client['backend_labs']
-
-# collections
-
-users_collection = db['users_collection']
+    # database
+    db = client['backend_labs']
+    return db
