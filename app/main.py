@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException,status,Query
 from typing import Annotated
 from .databases.mongo_db import get_db_connection
-from .schemas.user_schema import UserInModel
-from .services.service import create_user_logic
+from .schemas.user_schema import UserInModel, Email
+from .services.service import create_user_logic, search_user_email
 
 app = FastAPI()
 
@@ -24,7 +24,14 @@ async def sum_endpoint(a: Annotated[int,None] = Query(None), b: Annotated[int,No
         'status_code':status.HTTP_200_OK
     }
     
+    
 @app.post('/sign-up/')
 def create_user(new_user: UserInModel):
     db = get_db_connection()
-    return create_user_logic(new_user, db)  # 👈 Llama a la función lógica
+    return create_user_logic(new_user, db)
+
+
+@app.get('/user/')
+def search_user_by_email(user_email: Email):
+    db = get_db_connection()
+    return search_user_email(user_email.email, db)

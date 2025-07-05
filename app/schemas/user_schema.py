@@ -9,3 +9,6 @@ class UserOutModel(BaseModel):
     
 class UserInModel(UserOutModel):
     password: str
+    
+class Email(BaseModel):
+    email: EmailStr
