@@ -13,14 +13,14 @@ def root():
 # basic CRUD functions
 
 @app.post('/sum/')
-async def sum_endpoint(a: Annotated[int,None] = Query(None), b: Annotated[int,None] = Query(None)):
-    if a == None or b == None:
+async def sum_endpoint(num_1: Annotated[int,None] = Query(None), num_2: Annotated[int,None] = Query(None)):
+    if num_1 == None or num_2 == None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail='all parameters must be passed to'
         )
     return {
-        'result':a + b,
+        'result':num_1 + num_2,
         'status_code':status.HTTP_200_OK
     }
     
